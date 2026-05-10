@@ -7,7 +7,7 @@ A Java-based desktop application developed to manage train scheduling, routing l
 * **Routing Algorithm:** Supports both direct trips and indirect connections (changeovers). If no direct train exists between two stations, the system identifies intermediate stations to link the journey.
 * **Booking System:** Implements a strict seat availability check to prevent overbooking. It validates requested seats against the real-time capacity fetched from the database.
 * **Admin Dashboard:** Provides tools for system maintenance, including train management (CRUD operations), route creation, and real-time delay updates.
-* **Notification Flow:** Automated notification system for booking confirmations and delay alerts. Currently implemented via a `MockEmailProvider` that logs communications to a local audit file (`mail_system.log`).
+* **Notification Flow:** Automated notification system for booking confirmations and delay alerts. Currently implemented via a `MockEmailProvider` that logs communications to a local audit file (`mail_server.log`).
 
 ## 2. Technical Architecture
 
@@ -21,7 +21,7 @@ The application is built using a **Layered Architecture** to ensure maintainabil
 
 ## 3. Design Decisions
 
-* **Interface-based Notification System:** By using an `EmailProvider` interface, the notification logic is decoupled from the implementation. This allowed the use of a `MockProvider` for this assessment, ensuring security (no hardcoded credentials) while remaining "plug-and-play" for real SMTP integration.
+* **Interface-based Notification System:** By using an `EmailProvider` interface, the notification logic is decoupled from the implementation. This allowed the use of a `MockEmailProvider` for this assessment, ensuring security (no hardcoded credentials) while remaining "plug-and-play" for real SMTP integration.
 * **Database-Driven Integrity:** I relied on PostgreSQL foreign keys and constraints to handle data consistency at the storage level, rather than relying solely on application-level checks.
 * **Single Source of Truth:** Train capacity and seat availability are fetched directly from the database for every booking attempt to prevent issues with stale data in multi-user scenarios.
 
